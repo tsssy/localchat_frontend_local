@@ -48,10 +48,21 @@ export class APIServices {
     });
     
     try {
+      // Backend expects keys: init_data, optional bot_token (for local/dev)
+      const payload: any = {
+        init_data: requestBody.telegram_init_data,
+        start_param: requestBody.start_param,
+      };
+      // Attach bot token if provided in config or request
+      const maybeBotToken = (TelegramConfig as any)?.TELEGRAM_BOT_TOKEN || (requestBody as any).bot_token;
+      if (maybeBotToken) {
+        payload.bot_token = maybeBotToken;
+      }
+
       const responseBody = await httpRequester.request({
         url: endpoint_url,
         method: request_method,
-        data: requestBody,
+        data: payload,
         headers: {
           'Content-Type': 'application/json'
         }
