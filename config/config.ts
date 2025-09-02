@@ -8,8 +8,7 @@ export class APIConfig {
   static readonly DEBUG = false; // Set to false in production
   
   // Backend server configuration - Make this configurable
-  static readonly BACKEND_BASE_URL = "http://localhost:3001";
-  // static readonly BACKEND_BASE_URL = "http://localhost:8000";
+  static readonly BACKEND_BASE_URL = "http://localhost:8000";
   
   // API versioning
   static readonly API_VERSION = "v1";
