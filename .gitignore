@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Build outputs
+dist/
+build/
+coverage/
+.next/
+out/
+
+# Env files
+.env
+.env.*
+/Users/tsy/Documents/lovechat_frontend_formal && export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890 && cat > .gitignore << 'EOF'
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Build outputs
+dist/
+build/
+coverage/
+.next/
+out/
+
+# Env files
+.env
+.env.*
+!*.example
+
+# OS/IDE
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# Misc
+*.local
+EOF
+&&.example
+
+# OS/IDE
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# Misc
+*.local

@@ -1,0 +1,100 @@
+{
+  "timestamp": "2025-08-29T12:22:53.460Z",
+  "config": {
+    "USE_EXAMPLE_JSON": false,
+    "SHOW_DEBUG_INFO": true
+  },
+  "browser": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+    "platform": "MacIntel",
+    "language": "zh-CN",
+    "languages": ["zh-CN"],
+    "cookieEnabled": true,
+    "onLine": true,
+    "timezone": "Asia/Shanghai"
+  },
+  "telegram": {
+    "webAppAvailable": true,
+    "initData": "user=%7B%22id%22%3A7226798439%2C%22first_name%22%3A%22Yukio%E2%80%99s%20mom%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22yukiothecupid%22%2C%22language_code%22%3A%22zh-hans%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FdWjis3TpwK-x3fUy0WyhdMh-wEG04eKQhJP887q1S6dfF75KThnCj76iw0gbytYE.svg%22%7D&chat_instance=-6918928697941559481&chat_type=private&start_param=chatroom-68b15ed998b7a21a6a1f503c&auth_date=1756471020&signature=iTN54xBQC4Cfk__5YQJ7ohg-dheKWI1KiVEvberOIXyB0mH0IXNvugviQ7uYtzo1SLpqgKMQ4YNBHAkJl81RDg&hash=08de1d251699d32b1e9a5821f1717b04fc79c9bdce34992fb10c2b33626e1062",
+    "safeAreaInset": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+    },
+    "contentSafeAreaInset": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+    },
+    "viewportHeight": 645,
+    "viewportStableHeight": 645,
+    "isExpanded": true,
+    "colorScheme": "light",
+    "themeParams": {
+      "button_text_color": "#ffffff",
+      "section_header_text_color": "#6d6d71",
+      "section_separator_color": "#eaeaea",
+      "link_color": "#2481cc",
+      "bottom_bar_bg_color": "#e4e4e4",
+      "hint_color": "#999999",
+      "accent_text_color": "#2481cc",
+      "destructive_text_color": "#ff3b30",
+      "header_bg_color": "#efeff3",
+      "button_color": "#2481cc",
+      "secondary_bg_color": "#efeff3",
+      "text_color": "#000000",
+      "section_bg_color": "#ffffff",
+      "subtitle_text_color": "#999999",
+      "bg_color": "#ffffff"
+    },
+    "isClosingConfirmationEnabled": false,
+    "isVerticalSwipesEnabled": true,
+    "headerColor": "#ffffff",
+    "backgroundColor": "#ffffff",
+    "bottomBarColor": "#e4e4e4",
+    "version": "9.1",
+    "platform": "macos",
+    "initDataUnsafe": {
+      "user": {
+        "id": 7226798439,
+        "first_name": "Yukio's mom",
+        "last_name": "",
+        "username": "yukiothecupid",
+        "language_code": "zh-hans",
+        "allows_write_to_pm": true,
+        "photo_url": "https://t.me/i/userpic/320/dWjis3TpwK-x3fUy0WyhdMh-wEG04eKQhJP887q1S6dfF75KThnCj76iw0gbytYE.svg"
+      },
+      "chat_instance": "-6918928697941559481",
+      "chat_type": "private",
+      "start_param": "",
+      "auth_date": "1756470172",
+      "signature": "SqQ09eU6tIcKinjP6zF3LszYOCaZgUpdLDuFjKr5XoTKp4MQha7qIp7SAkWOq7iQswHSLLEFLH-vpkktmJPKCA",
+      "hash": "b03ec8acccd3a94444dcc5f9b33ccdef1ba335a0bf073f5e3a644d7fbbf29c27"
+    },
+    "user": {
+      "id": 7226798439,
+      "first_name": "Yukio's mom",
+      "last_name": "",
+      "username": "yukiothecupid",
+      "language_code": "zh-hans",
+      "allows_write_to_pm": true,
+      "photo_url": "https://t.me/i/userpic/320/dWjis3TpwK-x3fUy0WyhdMh-wEG04eKQhJP887q1S6dfF75KThnCj76iw0gbytYE.svg"
+    },
+    "startParam": "",
+    "authDate": "1756470172",
+    "hash": "b03ec8acccd3a94444dcc5f9b33ccdef1ba335a0bf073f5e3a644d7fbbf29c27",
+    "rawStartParam": "",
+    "validatedStartParam": ""
+  },
+  "auth": {
+    "method": "telegram",
+    "userId": 7226798439,
+    "username": "yukiothecupid",
+    "firstName": "Yukio's mom",
+    "lastName": "",
+    "languageCode": "zh-hans",
+    "photoUrl": "https://t.me/i/userpic/320/dWjis3TpwK-x3fUy0WyhdMh-wEG04eKQhJP887q1S6dfF75KThnCj76iw0gbytYE.svg"
+  }
+}

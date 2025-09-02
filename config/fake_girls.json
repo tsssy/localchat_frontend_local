@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Maya_Plants",
+    "age": 35,
+    "location": "USA",
+    "isOnline": true,
+    "photos": [
+      "https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dGlmdWwlMjB3b21hbiUyMHBvcnRyYWl0JTIwYXNpYW58ZW58MXx8fHwxNzU1NjYwOTE2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1724556295056-ba7d5f36bfc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGdhcmRlbmluZyUyMHBsYW50cyUyMG5hdHVyZXxlbnwxfHx8fDE3NTU3NjA4NjJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1554086310-6c4d1fde1350?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMG91dGRvb3IlMjBoaWtpbmclMjBuYXR1cmV8ZW58MXx8fHwxNzU1NzYwODY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    ],
+    "tags": ["Plants", "Gardening", "Nature", "Science", "PhD in Botany"],
+    "bio": "I love plants and nature. Currently working on my PhD in Botany. Let's chat about life and science!"
+  },
+  {
+    "id": 2,
+    "name": "Sophia_Dance",
+    "age": 28,
+    "location": "France",
+    "isOnline": true,
+    "photos": [
+      "https://images.unsplash.com/photo-1705162212651-d8f8f03d9748?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdXRlJTIwZ2lybCUyMHNlbGZpZXxlbnwxfHx8fDE3NTU2NjA5MTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1683974608358-6606fd6d5000?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGRhbmNpbmclMjBiYWxsZXQlMjBzdHVkaW98ZW58MXx8fHwxNzU1NzYwODY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1722882317369-796336edfa2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGRhbmNpbmclMjBzdHJlZXQlMjBwZXJmb3JtYW5jZXxlbnwxfHx8fDE3NTU3NjA4NzJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    ],
+    "tags": ["Dancing", "Music", "Art", "Travel"],
+    "bio": "Professional dancer who loves to explore new cultures and make friends around the world."
+  },
+  {
+    "id": 3,
+    "name": "Jessica_Fit",
+    "age": 26,
+    "location": "Canada",
+    "isOnline": true,
+    "photos": [
+      "https://images.unsplash.com/photo-1739210736873-45989243ac1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dGlmdWwlMjB3b21hbiUyMGZpdG5lc3MlMjBhdGhsZXRlfGVufDF8fHx8MTc1NTY3MzkwM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGZpdG5lc3MlMjB5b2dhJTIwZXhlcmNpc2V8ZW58MXx8fHwxNzU1NzYwODc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1678964117504-dc77a8b9985a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHJ1bm5pbmclMjBmaXRuZXNzJTIwb3V0ZG9vcnxlbnwxfHx8fDE3NTU3NjA4Nzl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    ],
+    "tags": ["Fitness", "Health", "Yoga", "Running", "Nutrition"],
+    "bio": "Fitness enthusiast and personal trainer. I love helping people achieve their health goals!"
+  },
+  {
+    "id": 4,
+    "name": "Isabella_Business",
+    "age": 32,
+    "location": "UK",
+    "isOnline": false,
+    "photos": [
+      "https://images.unsplash.com/photo-1746458258548-5e5bd7225c9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwd29tYW4lMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzU1NjczOTAzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1590650467980-8eadfa86ff48?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzc3dvbWFuJTIwb2ZmaWNlJTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc1NTY4MjQ1NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1553028826-defa0c2187d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGV4ZWN1dGl2ZSUyMGxlYWRlcnxlbnwxfHx8fDE3NTU3NjA4ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    ],
+    "tags": ["Business", "MBA", "Leadership", "Finance", "Strategy"],
+    "bio": "Business executive with an MBA. I enjoy discussing entrepreneurship and leadership strategies."
+  },
+  {
+    "id": 5,
+    "name": "Emma_Creative",
+    "age": 24,
+    "location": "Australia",
+    "isOnline": true,
+    "photos": [
+      "https://images.unsplash.com/photo-1619107187499-adbfd254e9ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHdvbWFuJTIwYXJ0aXN0fGVufDF8fHx8MTc1NTU4MzU0Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1601934025750-1e6694af7f41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHdvbWFuJTIwYXJ0aXN0JTIwcGhvdG9ncmFwaGVyfGVufDF8fHx8MTc1NTc2MDg4OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://images.unsplash.com/photo-1551180452-45cc5da51c3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGFydGlzdCUyMHBhaW50aW5nJTIwY3JlYXRpdmUlMjBzdHVkaW98ZW58MXx8fHwxNzU1NzYwODkyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    ],
+    "tags": ["Art", "Photography", "Design", "Creative", "Visual Arts"],
+    "bio": "Creative artist and photographer. I love capturing beautiful moments and creating unique art pieces."
+  }
+]
