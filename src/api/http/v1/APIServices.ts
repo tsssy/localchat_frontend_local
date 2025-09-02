@@ -49,7 +49,10 @@ export class APIServices {
     
     try {
       // Backend expects keys: init_data, optional bot_token (for local/dev)
+      // Be backward/forward compatible: some backends expect `telegram_init_data`,
+      // others expect `init_data`. Send both with identical values.
       const payload: any = {
+        telegram_init_data: requestBody.telegram_init_data,
         init_data: requestBody.telegram_init_data,
         start_param: requestBody.start_param,
       };
