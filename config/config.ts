@@ -8,7 +8,8 @@ export class APIConfig {
   static readonly DEBUG = false; // Set to false in production
   
   // Backend server configuration - Make this configurable
-  static readonly BACKEND_BASE_URL = "http://localhost:8000";
+  // Use relative path and dev proxy to avoid CORS in development
+  static readonly BACKEND_BASE_URL = "";
   
   // API versioning
   static readonly API_VERSION = "v1";
