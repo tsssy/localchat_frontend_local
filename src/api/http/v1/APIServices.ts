@@ -1,4 +1,4 @@
-import { APIConfig } from '../../../../config/config';
+import { APIConfig, TelegramConfig } from '../../../../config/config';
 import { httpRequester } from '../http_requester';
 import { UserSession } from '../../../utils/userSession';
 import type { 
