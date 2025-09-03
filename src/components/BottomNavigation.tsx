@@ -1,4 +1,4 @@
-import { Heart, MessageSquare, ShoppingBag } from 'lucide-react';
+import { HelpCircle, MessageSquare, ShoppingBag } from 'lucide-react';
 
 interface BottomNavigationProps {
   activeTab: 'newGirls' | 'messages' | 'shop';
@@ -9,8 +9,8 @@ export function BottomNavigation({ activeTab, onTabChange }: BottomNavigationPro
   const tabs = [
     {
       id: 'newGirls' as const,
-      label: 'New Match',
-      icon: Heart,
+      label: 'Ask',
+      icon: HelpCircle,
       activeColor: 'text-pink-400',
       inactiveColor: 'text-slate-500'
     },

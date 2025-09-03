@@ -563,136 +563,201 @@ export function NewGirls({ userSession, onChatNow, onClearCache, onUpdateCache, 
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-white p-4">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Vedic Astrology</h1>
+        <p className="text-gray-600 mt-2">Connect with expert astrologers</p>
+      </div>
 
+      {/* Loading State */}
+      {isLoading && (
+        <div className="flex items-center justify-center h-64">
+          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
 
-      {/* Girl Photo Gallery */}
-      <div className="flex-1 relative">
-        <ImageWithFallback
-          key={`${currentMatch.sub_account_id}-${currentImageIndex}`} // Force re-render when match changes
-          src={(() => {
-            const photos = getPhotosArray(currentMatch);
-            const selectedPhoto = photos[currentImageIndex];
-            console.log(`🖼️ [Render] Match: ${currentMatch.display_name} (${currentMatch.sub_account_id})`);
-            console.log(`🖼️ [Render] Displaying photo ${currentImageIndex + 1}/${photos.length}: ${selectedPhoto}`);
-            console.log(`🖼️ [Render] ImageWithFallback key: ${currentMatch.sub_account_id}-${currentImageIndex}`);
-            return selectedPhoto;
-          })()}
-          alt={`${currentMatch.display_name} - Photo ${currentImageIndex + 1}`}
-          className="w-full h-full object-cover"
-        />
-        
-        {/* Image Navigation */}
-        {getPhotosArray(currentMatch).length > 1 && (
-          <>
-            {/* Previous Image Button */}
-            <button
-              onClick={handlePrevImage}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 rounded-full flex items-center justify-center text-white transition-all duration-200"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            
-            {/* Next Image Button */}
-            <button
-              onClick={handleNextImage}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 rounded-full flex items-center justify-center text-white transition-all duration-200"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-            
-            {/* Image Dots Indicator */}
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-              {getPhotosArray(currentMatch).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                    index === currentImageIndex 
-                      ? 'bg-white' 
-                      : 'bg-white/50'
-                  }`}
-                />
-              ))}
+      {/* Error State */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+          <p className="text-red-800">{error}</p>
+        </div>
+      )}
+
+      {/* Expert Cards */}
+      {!isLoading && currentMatch && (
+        <div className="space-y-4">
+          {/* AI Expert Card */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start space-x-3">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=60&h=60&fit=crop&crop=face" 
+                    alt="AI Expert"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                    AI
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <h3 className="font-semibold text-gray-900">AI Astrologer</h3>
+                  </div>
+                  <p className="text-sm text-gray-600">Vedic astrology</p>
+                  <p className="text-sm text-gray-500">English, Hindi</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center space-x-1 mb-2">
+                  <span className="text-yellow-400">⭐</span>
+                  <span className="text-sm text-gray-600">5.0 (179396)</span>
+                </div>
+                <div className="text-sm font-medium text-gray-900 mb-2">FREE</div>
+                <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                  Chat
+                </button>
+              </div>
             </div>
-          </>
-        )}
-        
-        {/* Girl Info Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 pb-24 text-white">
-          <div className="flex items-center gap-2 mb-2">
-            <h2 className="text-2xl">{currentMatch.display_name}</h2>
-            <div className="w-3 h-3 rounded-full bg-green-400"></div>
-            <span className="text-sm text-green-400">online</span>
-          </div>
-          
-          {/* Basic Info Tags */}
-          <div className="flex flex-wrap gap-2 mb-3">
-            <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-base px-3 py-1">
-              {currentMatch.age ? `Age ${currentMatch.age}` : "Age Unknown"}
-            </Badge>
-            <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-base px-3 py-1">
-              {getDisplayLocation(currentMatch.location)}
-            </Badge>
           </div>
 
-          {/* Interest Tags */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {currentMatch.tags && currentMatch.tags.length > 0 ? (
-              currentMatch.tags.map((tag, index) => (
-                <Badge key={index} variant="outline" className="bg-white/10 text-white border-white/30 text-base px-3 py-1">
-                  {tag}
-                </Badge>
-              ))
-            ) : (
-              <Badge variant="outline" className="bg-white/10 text-white border-white/30 text-base px-3 py-1">
-                No interests listed
-              </Badge>
-            )}
+          {/* Human Expert Card 1 */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start space-x-3">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" 
+                    alt="Yash Kumar"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                    ✓
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <h3 className="font-semibold text-gray-900">Yash Kumar</h3>
+                  </div>
+                  <p className="text-sm text-gray-600">Vedic astrology</p>
+                  <p className="text-sm text-gray-500">Hindi</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center space-x-1 mb-2">
+                  <span className="text-yellow-400">⭐</span>
+                  <span className="text-sm text-gray-600">5.0 (2)</span>
+                </div>
+                <div className="text-sm font-medium text-gray-900 mb-2">10⭐️/message</div>
+                <div className="flex space-x-2">
+                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Call
+                  </button>
+                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Chat
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col gap-4">
-            <Button 
-              onClick={handleChatNow}
-              disabled={isInitializingChatroom}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full py-5 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isInitializingChatroom ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Initializing Chatroom...
+          {/* Human Expert Card 2 */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start space-x-3">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop&crop=face" 
+                    alt="Chaturbhuj S"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                    ✓
+                  </div>
                 </div>
-              ) : (
-                'Chat Now'
-              )}
-            </Button>
-            <Button 
-              onClick={handleGetAnotherMatch}
-              disabled={isLoadingAnotherMatch}
-              className="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-full py-5 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoadingAnotherMatch ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Finding Match...
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <h3 className="font-semibold text-gray-900">Chaturbhuj S</h3>
+                  </div>
+                  <p className="text-sm text-gray-600">Vedic astrology</p>
+                  <p className="text-sm text-gray-500">Hindi</p>
                 </div>
-              ) : (
-                (() => {
-                  const shouldShowPaidMatch = matchMetadata && 
-                    !(matchMetadata.match_summary?.has_initial_matches || matchMetadata.match_summary?.can_get_daily_free);
-                  
-                  return shouldShowPaidMatch
-                    ? (isLoadingCostPerMatch 
-                        ? 'Get Another Match (Loading...)' 
-                        : `Get Another Match (${costPerMatch} coins)`)
-                    : 'Get Another Match';
-                })()
-              )}
-            </Button>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center space-x-1 mb-2">
+                  <span className="text-yellow-400">⭐</span>
+                  <span className="text-sm text-gray-600">5.0 (1)</span>
+                </div>
+                <div className="text-sm font-medium text-gray-900 mb-2">10⭐️/message</div>
+                <div className="flex space-x-2">
+                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Call
+                  </button>
+                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Chat
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Human Expert Card 3 */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start space-x-3">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1494790108755-2616b25ad7b6?w=60&h=60&fit=crop&crop=face" 
+                    alt="Srijani P"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                    ✓
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <h3 className="font-semibold text-gray-900">Srijani P</h3>
+                  </div>
+                  <p className="text-sm text-gray-600">Vedic astrology</p>
+                  <p className="text-sm text-gray-500">Hindi, English, Bengali</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center space-x-1 mb-2">
+                  <span className="text-yellow-400">⭐</span>
+                  <span className="text-sm text-gray-600">5.0 (22)</span>
+                </div>
+                <div className="text-sm font-medium text-gray-900 mb-2">10⭐️/message</div>
+                <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                  Chat
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {/* Get Another Match Button */}
+      {!isLoading && currentMatch && (
+        <div className="mt-6">
+          <Button 
+            onClick={handleGetAnotherMatch}
+            disabled={isLoadingAnotherMatch}
+            className="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-lg py-3 text-base disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoadingAnotherMatch ? (
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                Finding Match...
+              </div>
+            ) : (
+              'Get Another Match'
+            )}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
