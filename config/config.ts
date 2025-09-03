@@ -9,7 +9,7 @@ export class APIConfig {
   
   // Backend server configuration - Make this configurable
   // Use relative path and dev proxy to avoid CORS in development
-  static readonly BACKEND_BASE_URL = "";
+  static readonly BACKEND_BASE_URL = "http://localhost:8000";
   
   // API versioning
   static readonly API_VERSION = "v1";
@@ -32,7 +32,7 @@ export class TelegramConfig {
   static readonly USE_EXAMPLE_JSON = true; // Set to true to use example_full_telegram_data.json
   
   // Telegram Web App API settings
-  static readonly TELEGRAM_BOT_TOKEN = ""; // Add your bot token here
+  static readonly TELEGRAM_BOT_TOKEN = "8378758545:AAEopP2oA8rPr2II4NWyiqkvQcVZTdT-GCw"; // Optional: set your bot token for local auth
   static readonly TELEGRAM_APP_NAME = "lovechat_app";
 }
 

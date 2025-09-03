@@ -62,6 +62,7 @@ export interface PaginatedResponse<T> extends APIResponse {
 export interface TelegramAuthRequest extends APIRequest {
   telegram_init_data: string; // The initData string from Telegram Web App
   start_param?: string; // Optional start parameter from Telegram Mini App launch
+  bot_token?: string; // Optional bot token for server-side validation (dev/local)
 }
 
 /**
