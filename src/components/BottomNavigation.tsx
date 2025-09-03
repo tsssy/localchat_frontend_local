@@ -1,19 +1,12 @@
-import { HelpCircle, MessageSquare, ShoppingBag } from 'lucide-react';
+import { MessageSquare, ShoppingBag } from 'lucide-react';
 
 interface BottomNavigationProps {
-  activeTab: 'newGirls' | 'messages' | 'shop';
-  onTabChange: (tab: 'newGirls' | 'messages' | 'shop') => void;
+  activeTab: 'messages' | 'shop';
+  onTabChange: (tab: 'messages' | 'shop') => void;
 }
 
 export function BottomNavigation({ activeTab, onTabChange }: BottomNavigationProps) {
   const tabs = [
-    {
-      id: 'newGirls' as const,
-      label: 'Ask',
-      icon: HelpCircle,
-      activeColor: 'text-pink-400',
-      inactiveColor: 'text-slate-500'
-    },
     {
       id: 'messages' as const,
       label: 'Message',

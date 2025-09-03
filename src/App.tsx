@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Toaster, toast } from 'sonner';
 import { Loading } from './components/pages/loading';
-import { NewGirls } from './components/pages/new-girls';
 import { Messages } from './components/pages/messages';
 import { Shop } from './components/pages/shop';
 import { ChatScreen } from './components/pages/chat';
@@ -12,11 +11,10 @@ import { ReconnectionIndicator } from './components/ui/ReconnectionIndicator';
 import { UserSession } from './utils/userSession';
 import { APIServices } from './api/http/v1/APIServices';
 import { MessageToastService } from './services/MessageToastService.tsx';
-import fakeGirls from '../config/fake_girls.json';
 import type { MessageCardData, ProductData } from './api/http/v1/APISchemes';
 
-type AppPage = 'loading' | 'newGirls' | 'messages' | 'shop' | 'chat' | 'purchaseHistory';
-type TabPage = 'newGirls' | 'messages' | 'shop';
+type AppPage = 'loading' | 'messages' | 'shop' | 'chat' | 'purchaseHistory';
+type TabPage = 'messages' | 'shop';
 
 interface InitializationData {
   userId: string; // Changed from number to string
@@ -28,7 +26,7 @@ interface InitializationData {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<AppPage>('loading');
-  const [activeTab, setActiveTab] = useState<TabPage>('newGirls');
+  const [activeTab, setActiveTab] = useState<TabPage>('messages');
   const [currentChatGirl, setCurrentChatGirl] = useState<any>(null);
   const [userSession, setUserSession] = useState<InitializationData | null>(null);
   const [pageStack, setPageStack] = useState<AppPage[]>([]); // Navigation stack for back button
@@ -120,9 +118,9 @@ export default function App() {
       if (lastPage === 'shop') {
         setActiveTab('shop');
         setCurrentPage('shop');
-      } else if (lastPage === 'new_match') {
-        setActiveTab('newGirls');
-        setCurrentPage('newGirls');
+              } else if (lastPage === 'new_match') {
+          setActiveTab('messages');
+          setCurrentPage('messages');
       } else if (lastPage === 'messages') {
         setActiveTab('messages');
         setCurrentPage('messages');
@@ -199,8 +197,8 @@ export default function App() {
             console.error('❌ [App] Failed to load chat profile:', error);
             // Still open chat with minimal data
             setCurrentChatGirl({
-              id: subAccountId,
-              name: `User_${subAccountId}`,
+              id: chatroomId,
+              name: `User_${chatroomId}`,
               photo: 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300',
               photos: ['https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'],
               isOnline: true,
@@ -220,36 +218,14 @@ export default function App() {
         setCurrentPage('messages');
       }
     } else {
-      // Default fallback - go to new match page
-      console.log('🎯 [App] Using default fallback route: new match');
-      setActiveTab('newGirls');
-      setCurrentPage('newGirls');
+      // Default fallback - go to messages page
+      console.log('🎯 [App] Using default fallback route: messages');
+      setActiveTab('messages');
+      setCurrentPage('messages');
     }
   };
 
-  // Mock data for girls
-  const girls = fakeGirls;
 
-  const [currentGirlIndex, setCurrentGirlIndex] = useState(0);
-  
-  // Track chatted girls (girls user has started chatting with)
-  const [chattedGirls, setChattedGirls] = useState<Array<{
-    id: number;
-    name: string;
-    avatar: string;
-    lastMessage: string;
-    timestamp: string;
-    unreadCount: number;
-    isOnline: boolean;
-    lastChatTime: Date;
-  }>>([]);
-
-  // Mock user data
-  const user = {
-    nickname: 'ysh945',
-    location: 'USA',
-    starBalance: 49
-  };
 
   // Handle clearing red dot when chatroom is clicked
   const handleChatroomRedDotClear = (chatroomId: string) => {
@@ -263,7 +239,7 @@ export default function App() {
 
   // Handle setting red dot when new message arrives
   const handleChatroomRedDotSet = (chatroomId: string) => {
-    console.log(`🔴 [App] Setting red dot for chatroom: ${chatroomId}`);
+    console.log(`🔴 [App] Clearing red dot for chatroom: ${chatroomId}`);
     setNewMessageChatrooms(prev => {
       const updated = new Set(prev);
       updated.add(chatroomId);
@@ -393,64 +369,9 @@ export default function App() {
     setPageStack([]);
   };
 
-  // Helper function to add girl to viewed/chatted list
-  const addGirlToMessages = (girl: any, isFromChatNow: boolean = false) => {
-    setChattedGirls(prev => {
-      const existingIndex = prev.findIndex(g => g.id === girl.id);
-      const now = new Date();
-      
-      const messageText = isFromChatNow ? 'Hey there! How are you doing today? 😊' : 'Click to start chatting! 💬';
-      const unreadCount = isFromChatNow ? 1 : 0;
-      
-      const chattedGirl = {
-        id: girl.id,
-        name: girl.name,
-        avatar: girl.photos[0], // Use first photo as avatar
-        lastMessage: messageText,
-        timestamp: 'just now',
-        unreadCount: unreadCount,
-        isOnline: girl.isOnline,
-        lastChatTime: now
-      };
-      
-      if (existingIndex >= 0) {
-        // Update existing girl and move to front
-        const updated = [...prev];
-        updated[existingIndex] = { 
-          ...updated[existingIndex], 
-          lastMessage: messageText,
-          lastChatTime: now, 
-          timestamp: 'just now',
-          unreadCount: isFromChatNow ? 1 : updated[existingIndex].unreadCount
-        };
-        updated.sort((a, b) => b.lastChatTime.getTime() - a.lastChatTime.getTime());
-        return updated;
-      } else {
-        // Add new girl at the front
-        return [chattedGirl, ...prev];
-      }
-    });
-  };
 
-  const handleChatNow = (girlInfo: { 
-    id: string; // This is the chatroomId from NewGirls
-    name: string; 
-    photo: string; 
-    photos?: string[]; 
-    isOnline: boolean; 
-    age?: number; 
-    location?: string; 
-    tags?: string[]; 
-    bio?: string; 
-  }) => {
-    // Push current page to stack before navigating to chat
-    setPageStack(prev => [...prev, currentPage]);
-    
-    // Extract chatroomId from girlInfo.id (NewGirls sets id as chatroomId)
-    setCurrentChatGirl({ chatroomId: girlInfo.id });
-    
-    setCurrentPage('chat'); // Navigate to chat page
-  };
+
+
 
   const handlePurchaseHistory = () => {
     // Push current page to stack before navigating to purchase history
@@ -490,9 +411,7 @@ export default function App() {
       setCurrentPage(previousPage);
       
       // Update activeTab to match the page we're returning to
-      if (previousPage === 'newGirls') {
-        setActiveTab('newGirls');
-      } else if (previousPage === 'messages') {
+      if (previousPage === 'messages') {
         setActiveTab('messages');
       } else if (previousPage === 'shop') {
         setActiveTab('shop');
@@ -507,9 +426,7 @@ export default function App() {
   // Handle tab navigation
   const handleTabChange = (tab: TabPage) => {
     setActiveTab(tab);
-    if (tab === 'newGirls') {
-      setCurrentPage('newGirls');
-    } else if (tab === 'messages') {
+    if (tab === 'messages') {
       setCurrentPage('messages');
     } else if (tab === 'shop') {
       setCurrentPage('shop');
@@ -595,16 +512,6 @@ export default function App() {
       />
       
       <div className="flex-1 overflow-hidden">
-        {currentPage === 'newGirls' && (
-          <NewGirls
-            userSession={userSession}
-            onChatNow={handleChatNow}
-            onClearCache={handleClearCache}
-            onUpdateCache={handleUpdateCache}
-            onNavigateToShop={handleNavigateToShop}
-          />
-        )}
-        
         {currentPage === 'messages' && (
           <Messages
             userSession={userSession}
