@@ -29,7 +29,7 @@ export class APIConfig {
 
 export class TelegramConfig {
   // Use example JSON data instead of actual Telegram data collection
-  static readonly USE_EXAMPLE_JSON = true; // Set to true to use example_full_telegram_data.json
+  static readonly USE_EXAMPLE_JSON = false; // Set to true to use example_full_telegram_data.json
   
   // Telegram Web App API settings
   static readonly TELEGRAM_BOT_TOKEN = "8378758545:AAEopP2oA8rPr2II4NWyiqkvQcVZTdT-GCw"; // Optional: set your bot token for local auth
