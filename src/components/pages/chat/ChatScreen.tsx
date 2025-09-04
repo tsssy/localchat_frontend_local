@@ -70,6 +70,19 @@ export function ChatScreen({ chatroomId, userSession, onClose, onNavigateToShop 
     return "Unknown";
   };
 
+  // Get local diviner avatar based on display name
+  const getDivinerAvatar = (displayName: string): string => {
+    const avatarMap: Record<string, string> = {
+      'Anya Greene': '/diviner_avatars/Anya_Greene.jpg',
+      'Daniel Chen': '/diviner_avatars/Daniel_Chen.jpg',
+      'Arjun Mehta': '/diviner_avatars/Arjun_Mehta.jpg',
+      'Kavita Patel': '/diviner_avatars/Kavita_Patel.jpg',
+      'Chronos [AI]': '/diviner_avatars/Chronos[AI].jpg',
+    };
+    
+    return avatarMap[displayName] || 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300';
+  };
+
   // Log nextPage initialization and changes + sync ref
   useEffect(() => {
     console.log('🔢 [ChatScreen] nextPage initialized/updated to:', nextPage);
@@ -896,7 +909,7 @@ export function ChatScreen({ chatroomId, userSession, onClose, onNavigateToShop 
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <ImageWithFallback
-            src={agentData?.avatar_url || 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'}
+            src={getDivinerAvatar(agentData?.display_name || agentData?.name || 'Loading...')}
             alt={agentData?.display_name || agentData?.name || 'Loading...'}
             className="w-full h-full object-cover"
           />
@@ -949,7 +962,7 @@ export function ChatScreen({ chatroomId, userSession, onClose, onNavigateToShop 
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <ImageWithFallback
-            src={agentData?.avatar_url || 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'}
+            src={getDivinerAvatar(agentData?.display_name || agentData?.name || 'Loading...')}
             alt={agentData?.display_name || agentData?.name || 'Loading...'}
             className="w-full h-full object-cover"
           />
@@ -1005,7 +1018,7 @@ export function ChatScreen({ chatroomId, userSession, onClose, onNavigateToShop 
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
-          src={agentData?.avatar_url || 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'}
+          src={getDivinerAvatar(agentData?.display_name || agentData?.name || 'Chat')}
           alt={agentData?.display_name || agentData?.name || 'Chat'}
           className="w-full h-full object-cover"
         />

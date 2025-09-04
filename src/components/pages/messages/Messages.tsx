@@ -320,6 +320,32 @@ export function Messages({
   // HELPER FUNCTIONS
   // ==========================================
   
+  // Get local diviner avatar based on display name
+  const getDivinerAvatar = (displayName: string): string => {
+    const avatarMap: Record<string, string> = {
+      'Anya Greene': '/diviner_avatars/Anya_Greene.jpg',
+      'Daniel Chen': '/diviner_avatars/Daniel_Chen.jpg',
+      'Arjun Mehta': '/diviner_avatars/Arjun_Mehta.jpg',
+      'Kavita Patel': '/diviner_avatars/Kavita_Patel.jpg',
+      'Chronos [AI]': '/diviner_avatars/Chronos[AI].jpg',
+    };
+    
+    return avatarMap[displayName] || "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=600&fit=crop&crop=face";
+  };
+
+  // Get diviner tags based on display name
+  const getDivinerTags = (displayName: string): string[] => {
+    const tagsMap: Record<string, string[]> = {
+      'Anya Greene': ['Tarot', 'Love', 'Career'],
+      'Daniel Chen': ['Numerology', 'Life Path', 'Success'],
+      'Arjun Mehta': ['Astrology', 'Relationships', 'Future'],
+      'Kavita Patel': ['Spiritual Guidance', 'Healing', 'Wisdom'],
+      'Chronos [AI]': ['Master of diverse divinatory arts'],
+    };
+    
+    return tagsMap[displayName] || ['Divination'];
+  };
+  
   const mapChatroomToMessageCard = (chatroom: ChatroomData) => {
     return {
       chatroom_id: chatroom.id
@@ -329,14 +355,20 @@ export function Messages({
   const getDisplayData = (chatroom: ChatroomData) => {
     const agent = chatroom.metadata?.participants?.agent;
     const lastMessage = chatroom.metadata?.last_messages?.[0];
+    const displayName = agent?.display_name || agent?.name || "Unknown User";
+    
+    // Check if the last message is a fake greeting or a real message
+    const isGreeting = lastMessage?.is_greeting === true;
+    const hasRealMessage = lastMessage && !isGreeting;
     
     return {
-      target_user_name: agent?.display_name || agent?.name || "Unknown User",
-      target_user_photo_url: agent?.avatar_url || "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=600&fit=crop&crop=face",
-      last_message: lastMessage?.message || "No messages yet",
+      target_user_name: displayName,
+      target_user_photo_url: getDivinerAvatar(displayName), // Use local diviner avatar
+      last_message: hasRealMessage ? lastMessage.message : "No messages yet",
       last_message_timestamp: lastMessage?.created_at ? new Date(lastMessage.created_at).toLocaleTimeString() : new Date().toLocaleTimeString(),
       unread_count: 0,
-      is_online: agent?.is_active
+      is_online: agent?.is_active,
+      tags: getDivinerTags(displayName) // Always show tags
     };
   };
 
@@ -430,11 +462,15 @@ export function Messages({
                     </div>
                   )}
                   
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3 flex-1">
                       <div className="relative">
                         <Avatar className="w-12 h-12">
-                          <AvatarImage src={displayData.target_user_photo_url} alt={displayData.target_user_name} />
+                          <AvatarImage 
+                            src={displayData.target_user_photo_url} 
+                            alt={displayData.target_user_name}
+                            className="object-cover object-top w-full h-full rounded-full"
+                          />
                           <AvatarFallback className="bg-blue-500 text-white">
                             {displayData.target_user_name.charAt(0).toUpperCase()}
                           </AvatarFallback>
@@ -446,7 +482,7 @@ export function Messages({
                         )}
                       </div>
                       
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <h3 className="text-white">{displayData.target_user_name}</h3>
                           {displayData.is_online && (
@@ -457,20 +493,34 @@ export function Messages({
                             <span className="text-red-400 text-xs">[New Message]</span>
                           )}
                         </div>
-                        <p className="text-slate-400 text-sm truncate max-w-[200px]">
+                        <p className="text-slate-400 text-sm truncate">
                           {displayData.last_message}
                         </p>
-                        <p className="text-slate-500 text-xs mt-1">{displayData.last_message_timestamp}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 ml-3">
                       {displayData.unread_count > 0 && (
                         <Badge className="bg-blue-500 text-white min-w-[20px] h-5 text-xs rounded-full flex items-center justify-center">
                           {displayData.unread_count}
                         </Badge>
                       )}
                       <ChevronRight className="w-5 h-5 text-slate-500" />
+                    </div>
+                  </div>
+                  
+                  {/* Bottom row: timestamp and tags */}
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="text-slate-500 text-xs">{displayData.last_message_timestamp}</p>
+                    <div className="flex items-center gap-1 flex-wrap justify-end">
+                      {displayData.tags.map((tag, index) => (
+                        <span 
+                          key={index}
+                          className="px-2 py-1 bg-blue-900/30 text-blue-300 text-xs rounded-md border border-blue-700/50"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
