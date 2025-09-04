@@ -48,19 +48,10 @@ export class APIServices {
     });
     
     try {
-      // Backend expects keys: init_data, optional bot_token (for local/dev)
-      // Be backward/forward compatible: some backends expect `telegram_init_data`,
-      // others expect `init_data`. Send both with identical values.
+      // Backend only expects telegram_init_data field (as per TelegramAuthRequest schema)
       const payload: any = {
-        telegram_init_data: requestBody.telegram_init_data,
-        init_data: requestBody.telegram_init_data,
-        start_param: requestBody.start_param,
+        telegram_init_data: requestBody.telegram_init_data
       };
-      // Attach bot token if provided in config or request
-      const maybeBotToken = (TelegramConfig as any)?.TELEGRAM_BOT_TOKEN || (requestBody as any).bot_token;
-      if (maybeBotToken) {
-        payload.bot_token = maybeBotToken;
-      }
 
       const responseBody = await httpRequester.request({
         url: endpoint_url,

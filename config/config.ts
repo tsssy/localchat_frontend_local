@@ -5,7 +5,7 @@
 
 export class APIConfig {
   // Environment settings
-  static readonly DEBUG = false; // Set to false in production
+  static readonly DEBUG = true; // Set to false in production
   
   // Backend server configuration - Make this configurable
   // Use relative path and dev proxy to avoid CORS in development
@@ -38,11 +38,11 @@ export class TelegramConfig {
 
 export class AppConfig {
   // Environment settings
-  static readonly DEBUG = false; // Set to false in production
+  static readonly DEBUG = true; // Set to false in production
   static readonly ENVIRONMENT = "development"; // development, staging, production
   
   // Debug info display on UI
-  static readonly SHOW_DEBUG_INFO = false; // Set to false to hide debug information
+  static readonly SHOW_DEBUG_INFO = true; // Set to false to hide debug information
   
   // Security settings
   static readonly ENABLE_CORS = true;
