@@ -4,6 +4,7 @@ import { APIServices } from '../../../api/http/v1/APIServices';
 import { UserSession, type UserSessionData } from '../../../utils/userSession';
 import { DebugWidget } from '../../ui/DebugWidget';
 import { PusherService } from '../../../services/PusherService';
+import { AutoChatroomService } from '../../../services/AutoChatroomService';
 
 interface LoadingProps {
   onInitializationComplete: (data: {
@@ -468,15 +469,39 @@ export function Loading({ onInitializationComplete }: LoadingProps) {
       console.log('✅ [Loading] Pusher setup complete - user channel subscribed');
       updateStatus('Step 4/5: Pusher setup complete');
       
+      // Step 4.5: Auto-initialize divination chatrooms for new users
+      console.log('🔮 [Loading] Step 4.5: Auto-initializing divination chatrooms...');
+      updateStatus('Step 4.5/6: Setting up divination specialists...');
+      
+      try {
+        const autoChatroomResult = await AutoChatroomService.initializeDivinationChatrooms();
+        
+        if (autoChatroomResult.success) {
+          console.log(`✅ [Loading] Auto-chatroom success: ${autoChatroomResult.createdChatrooms} chatrooms ready`);
+          updateStatus(`Step 4.5/6: ${autoChatroomResult.createdChatrooms} specialists ready`);
+        } else {
+          console.warn('⚠️ [Loading] Auto-chatroom had issues:', autoChatroomResult.error);
+          updateStatus('Step 4.5/6: Some specialists may not be available');
+        }
+        
+        // Don't fail the entire initialization if chatroom creation fails
+        // Users can still use the app and create chatrooms manually
+        
+      } catch (autoChatroomError) {
+        console.error('❌ [Loading] Auto-chatroom initialization failed:', autoChatroomError);
+        updateStatus('Step 4.5/6: Specialists setup had issues, continuing...');
+        // Continue with initialization - this is not a critical failure
+      }
+      
       // Step 5: Cache essential API data in parallel
       console.log('🎉 [Loading] Step 5: Starting parallel API caching...');
-      addCheckpoint('Step 5/6: Starting parallel API caching...');
+      updateStatus('Step 5/6: Starting parallel API caching...');
       
       const cacheResults = await performParallelCaching(authResponse.data.user.id);
       
       // Step 6: Determine routing based on start_param (highest priority) or last visited location
       console.log('🎉 [Loading] Initialization complete - determining route...');
-      addCheckpoint('Step 6/6: Determining app routing...');
+      updateStatus('Step 6/6: Determining app routing...');
       
       // Get routing information from auth response and start param
       const lastVisitedPage = authResponse.data.user.last_visited_page;
@@ -528,7 +553,7 @@ export function Loading({ onInitializationComplete }: LoadingProps) {
         lastVisitedPage
       });
       
-      addCheckpoint('Step 6/6: Updating debug info...');
+      updateStatus('Step 6/6: Updating debug info...');
       
       // Update debug info with final routing decision
       if (AppConfig.SHOW_DEBUG_INFO) {
@@ -547,7 +572,7 @@ export function Loading({ onInitializationComplete }: LoadingProps) {
         }));
       }
       
-      addCheckpoint('Step 6/6: Launching app...');
+      updateStatus('Step 6/6: Launching app...');
       
       // Small delay to show the final status
       await new Promise(resolve => setTimeout(resolve, 500));
