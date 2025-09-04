@@ -1,6 +1,6 @@
 /**
  * Configuration for API services and application settings.
- * All backend endpoints and other configurations are centralized here.
+ * Alll backend endpoints and other configurations are centralized here.
  */
 
 export class APIConfig {
