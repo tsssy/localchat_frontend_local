@@ -8,6 +8,7 @@ import { PurchaseHistory } from './components/pages/purchase-history/PurchaseHis
 import { BottomNavigation } from './components/BottomNavigation';
 import { DebugWidget } from './components/ui/DebugWidget';
 import { ReconnectionIndicator } from './components/ui/ReconnectionIndicator';
+import { ParticleBackground } from './components/ui/ParticleBackground';
 import { UserSession } from './utils/userSession';
 import { APIServices } from './api/http/v1/APIServices';
 import { MessageToastService } from './services/MessageToastService.tsx';
@@ -447,7 +448,8 @@ export default function App() {
   // Chat page (full screen)
   if (currentPage === 'chat' && currentChatGirl) {
     return (
-      <div className="h-screen bg-slate-900 text-white overflow-hidden">
+      <div className="h-screen mystical-background text-white overflow-hidden relative">
+        <ParticleBackground particleCount={8} />
         {/* Global Debug Widget for Chat Page */}
         <DebugWidget 
           debugInfo={{
@@ -477,7 +479,9 @@ export default function App() {
   }
 
   return (
-    <div className="h-screen bg-slate-900 text-white flex flex-col">
+    <div className="h-screen mystical-background text-white flex flex-col relative">
+      <ParticleBackground particleCount={6} />
+      
       {/* RULE 4: Top bar reconnection indicator */}
       <ReconnectionIndicator />
       
@@ -511,7 +515,7 @@ export default function App() {
         ]}
       />
       
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden relative z-10">
         {currentPage === 'messages' && (
           <Messages
             userSession={userSession}

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { APIServices } from '@/api/http/v1/APIServices';
 import { UserSession } from '@/utils/userSession';
 import { PusherService } from '@/services/PusherService';
+import { ParticleBackground } from '../../ui/ParticleBackground';
 import type { ChatroomData } from '@/api/http/v1/APISchemes';
 
 interface MessagesProps {
@@ -378,13 +379,14 @@ export function Messages({
 
   if (isLoading) {
     return (
-      <div className="flex flex-col h-full bg-slate-900">
-        <div className="p-6">
-          <h2 className="text-white text-2xl">Messages</h2>
+      <div className="flex flex-col h-full mystical-background relative">
+        <ParticleBackground particleCount={10} />
+        <div className="p-6 relative z-10">
+          <h2 className="text-white text-2xl title-glow">Messages</h2>
         </div>
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center relative z-10">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-slate-700 border-t-blue-400 rounded-full animate-spin mx-auto mb-4"></div>
+            <div className="w-8 h-8 border-2 border-slate-700 border-t-blue-400 rounded-full animate-spin mx-auto mb-4 pulse-glow"></div>
             <p className="text-slate-400">Loading your messages...</p>
           </div>
         </div>
@@ -394,14 +396,15 @@ export function Messages({
 
   if (error) {
     return (
-      <div className="flex flex-col h-full bg-slate-900">
-        <div className="p-6">
-          <h2 className="text-white text-2xl">Messages</h2>
+      <div className="flex flex-col h-full mystical-background relative">
+        <ParticleBackground particleCount={8} />
+        <div className="p-6 relative z-10">
+          <h2 className="text-white text-2xl title-glow">Messages</h2>
         </div>
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center relative z-10">
           <div className="text-center">
             <div className="text-red-400 mb-4">
-              <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-12 h-12 mx-auto mb-2 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -414,26 +417,28 @@ export function Messages({
   }
 
   return (
-    <div className="flex flex-col h-full bg-slate-900">
+    <div className="flex flex-col h-full mystical-background relative">
+      <ParticleBackground particleCount={12} />
+      
       {/* Messages Title */}
-      <div className="p-6">
-        <h2 className="text-white text-2xl">Messages</h2>
+      <div className="p-6 relative z-10">
+        <h2 className="text-white text-2xl title-glow">Messages</h2>
       </div>
 
       {/* Updating Banner - shown when fetching fresh data in background */}
       {isUpdating && (
-        <div className="mx-4 mb-4 bg-blue-900/50 border border-blue-700/50 rounded-lg px-4 py-2 flex items-center gap-3">
-          <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+        <div className="mx-4 mb-4 glassmorphism-card rounded-lg px-4 py-2 flex items-center gap-3 relative z-10">
+          <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin pulse-glow"></div>
           <span className="text-blue-300 text-sm">Updating latest messages...</span>
         </div>
       )}
 
       {/* Messages List */}
-      <div className="flex-1 px-4 pb-20 overflow-y-auto scrollbar-thin scrollbar-track-slate-800 scrollbar-thumb-slate-600 hover:scrollbar-thumb-slate-500">
+      <div className="flex-1 px-4 pb-20 overflow-y-auto mystical-scrollbar relative z-10">
         {chatrooms.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <div className="text-slate-400 mb-4">
-              <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-16 h-16 mx-auto mb-4 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
@@ -444,7 +449,7 @@ export function Messages({
           </div>
         ) : (
           <div className="space-y-3">
-            {chatrooms.map((chatroom) => {
+            {chatrooms.map((chatroom, index) => {
               const messageCard = mapChatroomToMessageCard(chatroom);
               const displayData = getDisplayData(chatroom);
               const hasRedDot = newMessageChatrooms.has(chatroom.id);
@@ -453,47 +458,48 @@ export function Messages({
                 <div
                   key={chatroom.id}
                   onClick={() => handleChatroomClick(messageCard)}
-                  className="relative bg-slate-800/50 rounded-2xl p-4 cursor-pointer hover:bg-slate-800/70 transition-colors"
+                  className="relative glassmorphism-card rounded-2xl p-4 cursor-pointer fade-in-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* New message red dot indicator - positioned on top right corner of card */}
                   {hasRedDot && (
-                    <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full border-2 border-slate-900 z-20 flex items-center justify-center shadow-lg" style={{backgroundColor: '#ef4444'}}>
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full border-2 border-slate-900 z-20 flex items-center justify-center shadow-lg new-message-dot">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
                     </div>
                   )}
                   
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3 flex-1">
-                      <div className="relative">
-                        <Avatar className="w-12 h-12">
+                      <div className="relative mystical-avatar">
+                        <Avatar className="w-12 h-12 pulse-glow">
                           <AvatarImage 
                             src={displayData.target_user_photo_url} 
                             alt={displayData.target_user_name}
                             className="object-cover object-top w-full h-full rounded-full"
                           />
-                          <AvatarFallback className="bg-blue-500 text-white">
+                          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white">
                             {displayData.target_user_name.charAt(0).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
                         
                         {/* Online status indicator */}
                         {displayData.is_online && (
-                          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-slate-900"></div>
+                          <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-slate-900 online-mystical"></div>
                         )}
                       </div>
                       
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <h3 className="text-white">{displayData.target_user_name}</h3>
+                          <h3 className="text-white font-medium">{displayData.target_user_name}</h3>
                           {displayData.is_online && (
-                            <span className="text-green-400 text-xs">online</span>
+                            <span className="text-green-400 text-xs font-medium">online</span>
                           )}
                           {/* Debug: Show red dot status */}
                           {hasRedDot && (
-                            <span className="text-red-400 text-xs">[New Message]</span>
+                            <span className="text-red-400 text-xs font-medium">[New Message]</span>
                           )}
                         </div>
-                        <p className="text-slate-400 text-sm truncate">
+                        <p className="text-slate-400 text-sm truncate mt-1">
                           {displayData.last_message}
                         </p>
                       </div>
@@ -501,7 +507,7 @@ export function Messages({
 
                     <div className="flex items-center gap-2 ml-3">
                       {displayData.unread_count > 0 && (
-                        <Badge className="bg-blue-500 text-white min-w-[20px] h-5 text-xs rounded-full flex items-center justify-center">
+                        <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white min-w-[20px] h-5 text-xs rounded-full flex items-center justify-center pulse-glow">
                           {displayData.unread_count}
                         </Badge>
                       )}
@@ -510,13 +516,13 @@ export function Messages({
                   </div>
                   
                   {/* Bottom row: timestamp and tags */}
-                  <div className="flex items-center justify-between mt-2">
+                  <div className="flex items-center justify-between mt-3">
                     <p className="text-slate-500 text-xs">{displayData.last_message_timestamp}</p>
                     <div className="flex items-center gap-1 flex-wrap justify-end">
-                      {displayData.tags.map((tag, index) => (
+                      {displayData.tags.map((tag, tagIndex) => (
                         <span 
-                          key={index}
-                          className="px-2 py-1 bg-blue-900/30 text-blue-300 text-xs rounded-md border border-blue-700/50"
+                          key={tagIndex}
+                          className="px-2 py-1 mystical-tag text-blue-300 text-xs rounded-md"
                         >
                           {tag}
                         </span>
