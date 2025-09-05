@@ -80,7 +80,8 @@ export function ChatScreen({ chatroomId, userSession, onClose, onNavigateToShop 
       'Chronos [AI]': '/diviner_avatars/Chronos[AI].jpg',
     };
     
-    return avatarMap[displayName] || 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300';
+    // Do not use external stock fallback to avoid flashing random image
+    return avatarMap[displayName] || '';
   };
 
   // Log nextPage initialization and changes + sync ref
@@ -880,7 +881,7 @@ export function ChatScreen({ chatroomId, userSession, onClose, onNavigateToShop 
       isOnline: subAccountProfile.status === 'available',
       photos: subAccountProfile.photo_urls && subAccountProfile.photo_urls.length > 0 
         ? subAccountProfile.photo_urls 
-        : ['https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'],
+        : [],
       tags: subAccountProfile.tags || [],
       bio: subAccountProfile.bio || 'No bio available'
     } : {
@@ -889,7 +890,7 @@ export function ChatScreen({ chatroomId, userSession, onClose, onNavigateToShop 
       age: 25,
       location: getDisplayLocation(null),
       isOnline: agentData?.isOnline || false,
-      photos: agentData?.avatar_url ? [agentData.avatar_url] : ['https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'],
+      photos: agentData?.avatar_url ? [agentData.avatar_url] : [],
       tags: [],
       bio: agentData?.bio || 'Loading profile...'
     };

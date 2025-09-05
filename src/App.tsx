@@ -139,8 +139,7 @@ export default function App() {
                 chatroomId: chatroomId, // Use chatroomId property for ChatScreen
                 id: chatroomId, // Keep id for backward compatibility
                 name: `Chatroom ${chatroomId}`,
-                photo: 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300',
-                photos: ['https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'],
+                // Remove placeholder images to avoid flashing a stock photo
                 isOnline: true,
                 age: 25,
                 location: 'Unknown',
@@ -180,8 +179,7 @@ export default function App() {
               chatroomId: chatroomId, // Use chatroomId property for ChatScreen
               id: chatroomId, // Keep id for backward compatibility
               name: `Chatroom ${chatroomId}`,
-              photo: 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300',
-              photos: ['https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'],
+              // Remove placeholder images to avoid flashing a stock photo
               isOnline: true,
               age: 25,
               location: 'Unknown',
@@ -196,12 +194,10 @@ export default function App() {
             
           } catch (error) {
             console.error('❌ [App] Failed to load chat profile:', error);
-            // Still open chat with minimal data
+            // Still open chat with minimal data (no placeholder images)
             setCurrentChatGirl({
               id: chatroomId,
               name: `User_${chatroomId}`,
-              photo: 'https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300',
-              photos: ['https://images.unsplash.com/photo-1603258339703-9c33e0733e4b?w=300'],
               isOnline: true,
               age: 25,
               location: 'Unknown',
