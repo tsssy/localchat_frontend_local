@@ -81,6 +81,8 @@ class HTTPRequester {
     // Default headers
     const defaultHeaders: Record<string, string> = {
       'Content-Type': 'application/json',
+      // Avoid ngrok interstitial in Telegram WebView and other embedded browsers
+      'ngrok-skip-browser-warning': 'true',
     };
 
     // Merge headers
