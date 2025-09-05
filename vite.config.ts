@@ -54,7 +54,7 @@
       outDir: 'build',
     },
     server: {
-      port: 3001,
+      port: 3333,
       open: true,
       allowedHosts: [
         'localhost',
@@ -67,7 +67,7 @@
       host: '0.0.0.0', // Allow external connections
       proxy: {
         '/api': {
-          target: 'http://localhost:8000',
+          target: 'http://localhost:9000',
           changeOrigin: true,
           secure: false,
         }
