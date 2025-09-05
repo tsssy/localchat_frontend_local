@@ -5,6 +5,7 @@ import { APIServices } from '@/api/http/v1/APIServices';
 import { UserSession } from '@/utils/userSession';
 import { TelegramWebApp } from '@/utils/telegramWebApp';
 import { AppConfig } from '../../../../config/config';
+import { ParticleBackground } from '../../ui/ParticleBackground';
 import type { ProductData } from '@/api/http/v1/APISchemes';
 
 interface ProductCard extends ProductData {
@@ -309,13 +310,14 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
 
   if (isLoading) {
     return (
-      <div className="h-full bg-slate-900 flex flex-col">
-        <div className="p-6">
-          <h2 className="text-white text-2xl text-center">Shop</h2>
+      <div className="h-full mystical-background relative flex flex-col">
+        <ParticleBackground particleCount={10} />
+        <div className="p-6 relative z-10">
+          <h2 className="text-white text-2xl text-center title-glow">Shop</h2>
         </div>
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center relative z-10">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-slate-700 border-t-blue-400 rounded-full animate-spin mx-auto mb-4"></div>
+            <div className="w-8 h-8 border-2 border-slate-700 border-t-purple-400 rounded-full animate-spin mx-auto mb-4 pulse-glow"></div>
             <p className="text-slate-400">Loading shop data...</p>
           </div>
         </div>
@@ -325,14 +327,15 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
 
   if (hasError) {
     return (
-      <div className="h-full bg-slate-900 flex flex-col">
-        <div className="p-6">
-          <h2 className="text-white text-2xl text-center">Shop</h2>
+      <div className="h-full mystical-background relative flex flex-col">
+        <ParticleBackground particleCount={8} />
+        <div className="p-6 relative z-10">
+          <h2 className="text-white text-2xl text-center title-glow">Shop</h2>
         </div>
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center relative z-10">
           <div className="text-center">
             <div className="text-red-400 mb-4">
-              <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-12 h-12 mx-auto mb-2 pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -345,21 +348,21 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
   }
 
   return (
-    <div className="h-full bg-slate-900 flex flex-col">
-
+    <div className="h-full mystical-background relative flex flex-col">
+      <ParticleBackground particleCount={12} />
 
       {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto mystical-scrollbar relative z-10">
         {/* Balance Card */}
         <div className="px-6 pt-12 pb-6">
-          <Card className="bg-slate-800/50 border-slate-700">
+          <Card className="glassmorphism-card border-purple-500/30">
             <CardContent className="p-6">
               <div className="text-center">
-                <p className="text-blue-400 text-lg mb-2 text-[20px]\">Your Balance</p>
+                <p className="text-purple-300 text-lg mb-2 text-[20px] title-glow">Your Balance</p>
                 <div className="flex items-center justify-center gap-3 mb-2">
                   {isLoadingCredits ? (
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 border-2 border-slate-600 border-t-blue-400 rounded-full animate-spin"></div>
+                      <div className="w-6 h-6 border-2 border-slate-600 border-t-purple-400 rounded-full animate-spin pulse-glow"></div>
                       <span className="text-white text-xl">Loading...</span>
                     </div>
                   ) : creditsError ? (
@@ -372,23 +375,10 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
                   )}
                 </div>
                 <p className="text-white/50 text-base mb-4 text-[16px]">Coins</p>
-                {/* <div className="flex items-center justify-center gap-2 mb-4">
-                  <span className="text-white/50 text-base text-[16px]">Cost per message:</span>
-                  {isLoadingSettings ? (
-                    <div className="flex items-center gap-1">
-                      <div className="w-4 h-4 border border-slate-600 border-t-blue-400 rounded-full animate-spin"></div>
-                      <span className="text-white/50 text-sm">Loading...</span>
-                    </div>
-                  ) : settingsError && costPerMessage === 0 ? (
-                    <span className="text-red-400 text-sm">Error</span>
-                  ) : (
-                    <span className="text-white/50 text-base text-[16px]">{costPerMessage}</span>
-                  )}
-                </div> */}
                 {/* Purchase History Link */}
                 <button 
                   onClick={onPurchaseHistory}
-                  className="text-white/60 text-sm underline hover:text-white/80 transition-colors text-[12px]"
+                  className="text-purple-300 text-sm underline hover:text-purple-200 transition-colors text-[12px]"
                 >
                   Purchase History
                 </button>
@@ -399,11 +389,11 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
 
         {/* Purchase Packages Title */}
         <div className="px-6 pb-4">
-          <h3 className="text-blue-400 text-xl text-center">Purchase Packages</h3>
+          <h3 className="text-purple-300 text-xl text-center title-glow">Purchase Packages</h3>
           
           {/* Payment Error Display */}
           {paymentError && (
-            <div className="mt-4 p-3 bg-red-900/50 border border-red-500 rounded-lg">
+            <div className="mt-4 p-3 bg-red-900/50 border border-red-500 rounded-lg glassmorphism-card">
               <p className="text-red-400 text-sm text-center">
                 <span className="font-semibold">Payment Error:</span> {paymentError}
               </p>
@@ -416,7 +406,7 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
           {isLoadingProducts ? (
             <div className="flex items-center justify-center py-12">
               <div className="text-center">
-                <div className="w-8 h-8 border-2 border-slate-700 border-t-blue-400 rounded-full animate-spin mx-auto mb-4"></div>
+                <div className="w-8 h-8 border-2 border-slate-700 border-t-purple-400 rounded-full animate-spin mx-auto mb-4 pulse-glow"></div>
                 <p className="text-slate-400">Loading products...</p>
               </div>
             </div>
@@ -424,7 +414,7 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
             <div className="flex items-center justify-center py-12">
               <div className="text-center">
                 <div className="text-red-400 mb-2">
-                  <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 mx-auto pulse-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -437,10 +427,10 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
                 <Card 
                   key={product.id} 
                   onClick={() => handleProductClick(product)}
-                  className={`bg-slate-800/50 border-slate-700 relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 ${
+                  className={`glassmorphism-card border-purple-500/30 relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 ${
                     clickedProduct === product.id 
-                      ? 'border-blue-400 border-2 shadow-lg shadow-blue-400/30' 
-                      : 'hover:border-slate-600'
+                      ? 'border-purple-400 border-2 shadow-lg shadow-purple-400/30' 
+                      : 'hover:border-purple-500/50'
                   } ${
                     isProcessingPayment === product.id ? 'opacity-50 pointer-events-none' : ''
                   }`}
@@ -450,8 +440,8 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
                   {isProcessingPayment === product.id && (
                     <div className="absolute inset-0 bg-slate-900/80 flex items-center justify-center z-10">
                       <div className="text-center">
-                        <div className="w-8 h-8 border-2 border-slate-700 border-t-blue-400 rounded-full animate-spin mx-auto mb-2"></div>
-                        <p className="text-blue-400 text-sm">Processing Payment...</p>
+                        <div className="w-8 h-8 border-2 border-slate-700 border-t-purple-400 rounded-full animate-spin mx-auto mb-2"></div>
+                        <p className="text-purple-400 text-sm">Processing Payment...</p>
                       </div>
                     </div>
                   )}
@@ -459,7 +449,7 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
                   <CardContent className={`flex flex-col ${product.show_feature && product.feature_text && product.feature_text.trim() !== '' ? 'px-4 pb-4 pt-0' : 'p-4'}`}>
                     {/* Banner Content - Above everything - Only show if show_feature is true AND feature_text exists */}
                     {product.show_feature && product.feature_text && product.feature_text.trim() !== '' && (
-                      <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-2 mt-2 mb-2">
+                      <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-2 mt-2 mb-2">
                         <p className="text-white text-xs text-center font-bold text-[12px]">{product.feature_text}</p>
                       </div>
                     )}
@@ -489,13 +479,6 @@ export function Shop({ userSession, onPurchaseGift, onPurchaseHistory }: ShopPro
             </div>
           )}
         </div>
-        
-        {/* Privacy Policy - Bottom
-        <div className="px-6 pb-24 text-center">
-          <button className="text-white/60 text-sm underline hover:text-white/80 transition-colors text-[11px]">
-            Privacy Policy
-          </button>
-        </div> */}
       </div>
     </div>
   );
