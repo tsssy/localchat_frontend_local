@@ -448,7 +448,7 @@ export function Messages({
             </p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {chatrooms.map((chatroom, index) => {
               const messageCard = mapChatroomToMessageCard(chatroom);
               const displayData = getDisplayData(chatroom);
@@ -469,7 +469,7 @@ export function Messages({
                   )}
                   
                   <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3 flex-1">
+                    <div className="flex items-start gap-4 flex-1">
                       <div className="relative mystical-avatar">
                         <Avatar className="w-12 h-12 pulse-glow">
                           <AvatarImage 
@@ -488,8 +488,8 @@ export function Messages({
                         )}
                       </div>
                       
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
+                      <div className="flex-1 min-w-0 pt-1">
+                        <div className="flex items-center gap-3 mb-2">
                           <h3 className="text-white font-medium">{displayData.target_user_name}</h3>
                           {displayData.is_online && (
                             <span className="text-green-400 text-xs font-medium">online</span>
@@ -499,9 +499,24 @@ export function Messages({
                             <span className="text-red-400 text-xs font-medium">[New Message]</span>
                           )}
                         </div>
-                        <p className="text-slate-400 text-sm truncate mt-1">
+                        <p className="text-slate-400 text-sm mb-3">
                           {displayData.last_message}
                         </p>
+                        
+                        {/* Bottom row: timestamp and tags */}
+                        <div className="flex items-center justify-between">
+                          <p className="text-slate-500 text-xs">{displayData.last_message_timestamp}</p>
+                          <div className="flex items-center gap-1 flex-wrap">
+                            {displayData.tags.map((tag, tagIndex) => (
+                              <span 
+                                key={tagIndex}
+                                className="px-2 py-1 mystical-tag text-purple-300 text-xs rounded-md"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -515,21 +530,6 @@ export function Messages({
                         </Badge>
                       )}
                       <ChevronRight className="w-5 h-5 text-slate-500" />
-                    </div>
-                  </div>
-                  
-                  {/* Bottom row: timestamp and tags */}
-                  <div className="flex items-center justify-between mt-3">
-                    <p className="text-slate-500 text-xs">{displayData.last_message_timestamp}</p>
-                    <div className="flex items-center gap-1 flex-wrap justify-end">
-                      {displayData.tags.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className="px-2 py-1 mystical-tag text-purple-300 text-xs rounded-md"
-                        >
-                          {tag}
-                        </span>
-                      ))}
                     </div>
                   </div>
                 </div>
