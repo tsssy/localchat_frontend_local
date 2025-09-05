@@ -477,7 +477,7 @@ export function Messages({
                             alt={displayData.target_user_name}
                             className="object-cover object-top w-full h-full rounded-full"
                           />
-                          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+                          <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-600 text-white">
                             {displayData.target_user_name.charAt(0).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
@@ -507,7 +507,10 @@ export function Messages({
 
                     <div className="flex items-center gap-2 ml-3">
                       {displayData.unread_count > 0 && (
-                        <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white min-w-[20px] h-5 text-xs rounded-full flex items-center justify-center pulse-glow">
+                        <Badge className="bg-gradient-to-r from-purple-500 to-pink-600 text-white min-w-[20px] h-5 text-xs rounded-full flex items-center justify-center pulse-glow"
+                        style={{
+                          boxShadow: '0 0 15px rgba(196, 181, 253, 0.5)'
+                        }}>
                           {displayData.unread_count}
                         </Badge>
                       )}
@@ -522,7 +525,7 @@ export function Messages({
                       {displayData.tags.map((tag, tagIndex) => (
                         <span 
                           key={tagIndex}
-                          className="px-2 py-1 mystical-tag text-blue-300 text-xs rounded-md"
+                          className="px-2 py-1 mystical-tag text-purple-300 text-xs rounded-md"
                         >
                           {tag}
                         </span>
